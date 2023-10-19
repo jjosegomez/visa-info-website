@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-function Navbar(){
+function Hero(){
     return(
-        <div className="navbar">
-            <h2>Visa Information</h2>
+        <div className="hero">
+            <h2>this is the hero section</h2>
         </div>
     )
 }
 
-export default Navbar;
+export default Hero;
