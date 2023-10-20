@@ -1,0 +1,10 @@
+.hero {
+    margin: 2rem auto;
+    max-width: 1200px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    background-color: #fefefe;
+    border-radius: 5px;
+    color: black;
+}
