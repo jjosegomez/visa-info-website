@@ -1,0 +1,14 @@
+.contact-form{
+    text-align: center;
+    background: #fff;
+    padding: 1.5rem 1rem;
+    border-radius: 5px;
+}
+
+.contact-form > form > input, .contact-form > form > textarea {
+    font-family: inherit;
+    width: 80%;
+    margin: 1rem;
+    padding: .5rem;
+    line-height: 30px;
+}

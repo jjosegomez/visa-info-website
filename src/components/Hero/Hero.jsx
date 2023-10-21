@@ -6,7 +6,8 @@ function Hero(){
     return(
         <div className="hero">
             <div className="hero-text">
-                <h2>this is the hero section</h2>
+                <h2>Everyone can get a <span className="title-decoration">Green Card</span> check this out!</h2>
+                <p>my name is ricardo i have a green card, my name is ricardo i have a green card, my name is ricardo i have a green cardmy name is ricardo i have a green cardmy name is ricardo i have a green cardmy name is ricardo i have a green card</p>
             </div>
             <div className="hero-form">
                 <ContactForm/>

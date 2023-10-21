@@ -1,67 +1,83 @@
-import React, { Component } from 'react';
+import formData from 'form-data';
+import Mailgun from '../../../mailgun.js';
+import React, { useState } from "react";
+import "./ContactForm.css"
 
-class ContactForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      email: '',
-      message: '',
-    };
-  }
+const ContactForm = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
-  handleInputChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+    let message = `name -> ${name}\nemail -> ${email}\nmessage -> ${message}`;
+    console.log(message)
+    // 
+    const API_KEY = 'a38fa04598d9cd7ee1b08f0e516baaff-3750a53b-7cf1953d';
+    const DOMAIN = 'sandbox81c55d3eee84414da39d2d74fb3fed9d.mailgun.org';
+
+
+    const mailgun = new Mailgun(formData);
+    const client = mailgun.client({ username: 'api', key: API_KEY });
+
+    sendEmail = (message) => {
+
+      const messageData = {
+        from: 'EB-2 Visa Advisor <me@sandbox81c55d3eee84414da39d2d74fb3fed9d.mailgun.org>',
+        to: ['jjgomezswe@gmail.com', 'gomezcardenasricardo@gmail.com'],
+        subject: 'New Visa Information Client!!',
+        text: message
+      };
+
+      client.messages.create(DOMAIN, messageData)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+    //
   };
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    // Handle form submission here (e.g., send data to the server).
-    // You can use this.state to access form field values.
-    console.log(this.state);
-  };
+  return (
+    <div className='contact-form'>
+      <h1>Contact Us</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder='Enter your name'
+          value={name} // Removed the function call
+          onChange={(e) => setName(e.target.value)} // Use onChange to update the state
+          required
+        ></input>
 
-  render() {
-    return (
-      <div className='contact-form'>
-        <h1>Contact Us</h1>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={this.state.name}
-            onChange={this.handleInputChange}
-            required
-          /><br /><br />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder='Enter your email'
+          value={email} // Removed the function call
+          onChange={(e) => setEmail(e.target.value)} // Use onChange to update the state
+          required
+        ></input>
 
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={this.state.email}
-            onChange={this.handleInputChange}
-            required
-          /><br /><br />
-
-          <label htmlFor="message">Message:</label><br />
-          <textarea
-            id="message"
-            name="message"
-            value={this.state.message}
-            onChange={this.handleInputChange}
-            rows="4"
-            required
-          /><br /><br />
-
-          <input type="submit" value="Submit" />
-        </form>
-      </div>
-    );
-  }
-}
+        <textarea
+          id="message"
+          name="message"
+          placeholder='Write us a message!'
+          value={message} // Removed the function call
+          onChange={(e) => setMessage(e.target.value)} // Use onChange to update the state
+          rows="4"
+          required
+        ></textarea>
+        <input style={{ width: "150px" }} type="submit" value="Contact Us" />
+      </form>
+    </div>
+  );
+};
 
 export default ContactForm;
+
