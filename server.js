@@ -18,15 +18,19 @@ const messageData = {
   subject: 'New Visa Information Client!!',
   text: message
 };
-
+isSent = null
 client.messages
   .create(DOMAIN, messageData)
   .then((response) => {
     console.log(response);
+    isSent = true
   })
   .catch((error) => {
     console.error(error);
+    isSent = false
   });
+  console.log("email sent? ",isSent)
+  return isSent
 }
 
 const cors = require('cors'); // Import the cors middleware
@@ -50,10 +54,11 @@ app.post('/api/endpoint', (req, res) => {
   }
 
   // Process the input string (you can perform any operation here)
-  const processedString = `<h2>Hi you have a new client!!</h2><br><br><strong style={color:red}>${email} | ${name}</strong> \nIs trying to reach out to you.\n\n${message}`;
+  const processedString = `New Client!\n\nName: ${name}\nEmail: ${email}\nMessage:\n${message}`;
+  
+  isSent = sendEmail(processedString)
 
-  res.json({ response: true });
-  sendEmail(processedString)
+  res.json({ response: isSent });
 });
 
 // Start the server

@@ -18,24 +18,24 @@ const ContactForm = () => {
 
       console.log(response.data);
       if (response.data) {
-        alert("thanks we'll in contact with you shortly")
-      }
-      if (response.data === undefined){
-        alert(`data is undefined\n\n${data}`)
+        alert("thanks we'll in contact you shortly")
+        setName("")
+        setEmail("")
+        setMessage("")
       }
       // Handle the response from the server here
     } catch (error) {
       console.error(error);
+      alert("we had an error on out end. please contact our support")
       // Handle errors here
     }
-    setName("")
-    setEmail("")
-    setMessage("")
+
+    
   };
 
   return (
     <div className='contact-form'>
-      <h2>Want to Learn More? <br></br>Request a <span className="title-decoration">Free</span> Consulation Now!</h2>
+      <h2>Want to Learn More? <br></br>Request a <span className="title-decoration">Free</span> Meeting Now!</h2>
       <form onSubmit={sendEmail}>
         <input
           type="text"
