@@ -10,13 +10,16 @@ const ContactForm = () => {
   const sendEmail = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5050/send-email', {
+      const response = await axios.post('http://localhost:3001/api/endpoint', {
         name: name,
         email: email,
         message: message,
       });
 
       console.log(response.data);
+      if (response.data) {
+        alert("thanks we'll in contact with you shortly")
+      }
       if (response.data === undefined){
         alert(`data is undefined\n\n${data}`)
       }
@@ -25,11 +28,14 @@ const ContactForm = () => {
       console.error(error);
       // Handle errors here
     }
+    setName("")
+    setEmail("")
+    setMessage("")
   };
 
   return (
     <div className='contact-form'>
-      <h2>Contact Us!</h2>
+      <h2>Want to Learn More? <br></br>Request a <span className="title-decoration">Free</span> Consulation Now!</h2>
       <form onSubmit={sendEmail}>
         <input
           type="text"

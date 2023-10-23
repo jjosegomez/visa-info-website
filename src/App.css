@@ -8,3 +8,7 @@ button {
     border: none;
 }
 
+.title-decoration {
+    color: green;
+    text-transform: uppercase;
+}
