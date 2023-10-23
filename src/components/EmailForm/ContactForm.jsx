@@ -1,49 +1,36 @@
-import formData from 'form-data';
-import Mailgun from '../../../mailgun.js';
 import React, { useState } from "react";
 import "./ContactForm.css"
+import axios from "axios";
 
 const ContactForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
-    let message = `name -> ${name}\nemail -> ${email}\nmessage -> ${message}`;
-    console.log(message)
-    // 
-    const API_KEY = 'a38fa04598d9cd7ee1b08f0e516baaff-3750a53b-7cf1953d';
-    const DOMAIN = 'sandbox81c55d3eee84414da39d2d74fb3fed9d.mailgun.org';
+  const sendEmail = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:5050/send-email', {
+        name: name,
+        email: email,
+        message: message,
+      });
 
-
-    const mailgun = new Mailgun(formData);
-    const client = mailgun.client({ username: 'api', key: API_KEY });
-
-    sendEmail = (message) => {
-
-      const messageData = {
-        from: 'EB-2 Visa Advisor <me@sandbox81c55d3eee84414da39d2d74fb3fed9d.mailgun.org>',
-        to: ['jjgomezswe@gmail.com', 'gomezcardenasricardo@gmail.com'],
-        subject: 'New Visa Information Client!!',
-        text: message
-      };
-
-      client.messages.create(DOMAIN, messageData)
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+      console.log(response.data);
+      if (response.data === undefined){
+        alert(`data is undefined\n\n${data}`)
+      }
+      // Handle the response from the server here
+    } catch (error) {
+      console.error(error);
+      // Handle errors here
     }
-    //
   };
 
   return (
     <div className='contact-form'>
-      <h1>Contact Us</h1>
-      <form onSubmit={handleSubmit}>
+      <h2>Contact Us!</h2>
+      <form onSubmit={sendEmail}>
         <input
           type="text"
           id="name"
@@ -73,7 +60,7 @@ const ContactForm = () => {
           rows="4"
           required
         ></textarea>
-        <input style={{ width: "150px" }} type="submit" value="Contact Us" />
+        <input className="submit-button" type="submit" value="Submit" />
       </form>
     </div>
   );

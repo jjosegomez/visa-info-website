@@ -1,17 +1,26 @@
 .hero {
-    margin: 1rem auto;
+    margin: 3rem auto;
     max-width: 1200px;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
+    align-items: center;
     border-radius: 5px;
     color: black;
 }
 
 .hero-text {
-    max-width: 525px;
-    margin: 2rem;
+    line-height: 50px;
+    font-size: 1.7rem;
+    max-width: 580px;
+    margin: 1.5rem;
     /* border: yellow solid; */
+}
+
+.hero-text > p {
+    line-height: 24px;
+    margin: 1rem 0;
+    font-size: 1rem;
 }
 
 .title-decoration {
@@ -20,7 +29,7 @@
 
 .hero-form {
     min-width: 350px;
-    max-width: 525px;
+    max-width: 450px;
     margin: 2rem;
     /* border: green solid 1px; */
 }
