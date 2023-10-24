@@ -29,8 +29,6 @@ const ContactForm = () => {
       alert("we had an error on out end. please contact our support")
       // Handle errors here
     }
-
-    
   };
 
   return (

@@ -3,11 +3,17 @@ const bodyParser = require('body-parser');
 const formData = require('form-data');
 const Mailgun = require('mailgun.js');
 
+require('dotenv').config();
+
 const app = express();
 
+// process.env.USER_ID
+// process.env.USER_KEY
+// process.env.NODE_ENV
+
 function sendEmail(message){
-const API_KEY = 'a38fa04598d9cd7ee1b08f0e516baaff-3750a53b-7cf1953d';
-const DOMAIN = 'sandbox81c55d3eee84414da39d2d74fb3fed9d.mailgun.org';
+const API_KEY = process.env.MAILGUN_API;
+const DOMAIN = process.env.MAILGUN_DOMAIN;
 
 const mailgun = new Mailgun(formData);
 const client = mailgun.client({ username: 'api', key: API_KEY });
@@ -18,7 +24,7 @@ const messageData = {
   subject: 'New Visa Information Client!!',
   text: message
 };
-isSent = null
+let isSent = null
 client.messages
   .create(DOMAIN, messageData)
   .then((response) => {
