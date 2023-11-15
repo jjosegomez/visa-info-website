@@ -1,0 +1,32 @@
+.hero {
+    margin: 3rem auto;
+    max-width: 1200px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 5px;
+    color: black;
+}
+
+.hero-text {
+    line-height: 50px;
+    font-size: 1.7rem;
+    max-width: 580px;
+    margin: 1.5rem;
+    /* border: yellow solid; */
+}
+
+.hero-text > p {
+    line-height: 24px;
+    margin: 1rem 0;
+    font-size: 1rem;
+    text-align: justify;
+}
+
+.hero-form {
+    min-width: 350px;
+    max-width: 450px;
+    margin: 2rem;
+    /* border: green solid 1px; */
+}
