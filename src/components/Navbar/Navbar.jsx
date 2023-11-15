@@ -19,7 +19,7 @@ function Navbar() {
     return (
         <div className="navbar">
             <div className="desktop-navbar">
-                <h2>Visa Information</h2>
+                <h2> <span className="title-decoration">Green Card</span> para profesionales</h2>
                 <div className="nav-link-list">
                     <a className="nav-link" href="#">Home</a>
                     <a className="nav-link" href="#">About</a>
