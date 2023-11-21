@@ -9,8 +9,14 @@ const ContactForm = () => {
 
   const sendEmail = async (event) => {
     event.preventDefault();
+
+    function clearForm() {
+      setName("");
+      setEmail("");
+      setMessage("");
+    }
     try {
-      const response = await axios.post('http://localhost:3001/api/endpoint', {
+      const response = await axios.post('https://ayqxsyye1m.execute-api.us-east-2.amazonaws.com/default/MailgunServer', {
         name: name,
         email: email,
         message: message,
@@ -19,9 +25,7 @@ const ContactForm = () => {
       console.log(response.data);
       if (response.data) {
         alert("thanks we'll in contact you shortly")
-        setName("")
-        setEmail("")
-        setMessage("")
+        clearForm();
       }
       // Handle the response from the server here
     } catch (error) {
@@ -39,6 +43,7 @@ const ContactForm = () => {
           type="text"
           id="name"
           name="name"
+          autocomplete
           placeholder='Enter your name'
           value={name} // Removed the function call
           onChange={(e) => setName(e.target.value)} // Use onChange to update the state
@@ -49,6 +54,7 @@ const ContactForm = () => {
           type="email"
           id="email"
           name="email"
+          autocomplete
           placeholder='Enter your email'
           value={email} // Removed the function call
           onChange={(e) => setEmail(e.target.value)} // Use onChange to update the state
